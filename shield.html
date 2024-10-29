@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+Testing template
+
+    <form method="post">
+
+    <select name="ShieldType" method="GET">
+
+
+
+    <label for="Capacitors">Capacitors:</label>
+    <input type="text" name="Capacitors" id="Capacitors">
+    <br>
+    <label for="Boosters">Boosters:</label>
+    <input type="text" name="Boosters" id="Boosters">
+    <br>
+    <button type="submit">Submit</button>
+    <br>
+
+    <textarea name="result" id="result" cols="30" rows="10">{{ result }}</textarea>
+    </form>
+
+{% endblock %}

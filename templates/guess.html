@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guessing Game</title>
+</head>
+<body>
+    <h2>Make a Guess!</h2>
+    <p>Range: {{ low }} - {{ high }}</p>
+    <p>Computer's Guess: {{ guess }}</p>
+    <p>Attempts: {{ attempts }} / {{ max_attempts }}</p>
+
+    <form action="/guess" method="post">
+        <button name="response" value="L" type="submit">Too Low</button>
+        <button name="response" value="H" type="submit">Too High</button>
+        <button name="response" value="R" type="submit">Restart</button>
+    </form>
+</body>
+</html>

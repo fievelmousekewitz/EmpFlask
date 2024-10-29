@@ -1,0 +1,10 @@
+---
+ShieldGeneratorCV:
+  Power: 17500
+  PowerIdle: 350
+  Shield: 12000
+
+ShieldBoosterImproved:
+  Power: 500
+  PowerIdle: 100
+  Shield: 500

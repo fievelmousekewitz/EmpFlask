@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guessing Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { max-width: 500px; margin: auto; padding: 20px; }
+        .hidden { display: none; }
+        button { padding: 10px 20px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Binary Search Solver</h2>
+        <!-- Step 1: Set the Range -->
+        <div id="setup">
+            <label for="low">Enter Low Value:</label>
+            <input type="number" id="low" required><br>
+
+            <label for="high">Enter High Value:</label>
+            <input type="number" id="high" required><br>
+
+            <button onclick="startGame()">Start Game</button>
+        </div>
+
+        <!-- Step 2: Game Interface -->
+        <div id="game" class="hidden">
+            <p>Midpoint Guess:<b> <span id="guess"></span></b></p>
+            <p>Range: <span id="range"></span></p>
+            <button onclick="respond('L')">Too Low</button>
+            <button onclick="respond('H')">Too High</button>
+            <button onclick="restartGame()">Restart</button>
+
+            <p>Attempts: <span id="attempts">0</span> / <span id="maxAttempts"></span></p>
+        </div>
+    </div>
+
+    <script>
+        let low, high, guess, attempts, maxAttempts;
+
+        function startGame() {
+            low = parseInt(document.getElementById('low').value);
+            high = parseInt(document.getElementById('high').value);
+
+            if (isNaN(low) || isNaN(high) || low >= high) {
+                alert("Please enter a valid range where Low < High.");
+                return;
+            }
+
+            // Calculate max attempts and reset attempts
+            maxAttempts = Math.ceil(Math.log2(high - low + 1));
+            attempts = 0;
+
+            // Update the UI
+            document.getElementById('setup').classList.add('hidden');
+            document.getElementById('game').classList.remove('hidden');
+            document.getElementById('maxAttempts').textContent = maxAttempts;
+
+            makeGuess();
+        }
+
+        function makeGuess() {
+            // Calculate the midpoint guess
+            guess = Math.floor((low + high) / 2);
+            attempts += 1;
+
+            // Update the guess and attempts in the UI
+            document.getElementById('guess').textContent = guess;
+            document.getElementById('range').textContent = `${low} - ${high}`;
+            document.getElementById('attempts').textContent = attempts;
+        }
+
+        function respond(response) {
+            if (response === 'L') {
+                low = guess + 1;
+            } else if (response === 'H') {
+                high = guess - 1;
+            }
+
+            if (low > high) {
+                alert("Game Over! Something went wrong.");
+                restartGame();
+            } else {
+                makeGuess();
+            }
+        }
+
+        function restartGame() {
+            document.getElementById('setup').classList.remove('hidden');
+            document.getElementById('game').classList.add('hidden');
+            document.getElementById('low').value = '';
+            document.getElementById('high').value = '';
+        }
+    </script>
+</body>
+</html>
